@@ -55,7 +55,21 @@ function login(req, res) {
     }
   });
 }
+function refreshAccessToken(req,res){
+const {token} = req.body
+const {user_id} = jwt.decoded(token)
+User.findOne({_id:user_id},(error,userStorage)=>{
+  if(error){
+res.status(500).send({msg:"Error del servidor"})
+  } else{
+    res.status(200).send({
+      accessToken:jwt.createAccessToken(userStorage)
+    })
+  }
+})
+}
 module.exports = {
   register,
-  login
+  login,
+  refreshAccessToken
 };
