@@ -51,7 +51,20 @@ function updatePost(req,res){
         }
     })
 }
+
+function deletePost(req,res){
+const {id} = req.params;
+
+Post.findByIdAndDelete({_id:id},(error)=>{
+    if(error){
+        res.status(400).send({msg:"Error al eliminar el post"})
+    } else{
+        res.status(200).send({msg:"Post eliminado"})
+    }
+})
+}
 module.exports={
     createPost,
     getPosts,
-    updatePost}
+    updatePost,
+    deletePost}
