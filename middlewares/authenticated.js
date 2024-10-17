@@ -16,7 +16,6 @@ if(exp<=currentData){
     req.user=payloadUser
 next();
 }
-console.log(exp,currentData)
    } catch (error) {
     return res.status(400).send({msg:"token invalido"})
    }
