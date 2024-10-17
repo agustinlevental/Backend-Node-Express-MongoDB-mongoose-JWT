@@ -84,9 +84,24 @@ userData.avatar=imagePath;
     }
   }
 
+async function deleteUser(req,res){
+    const {id} = req.params
+    User.findByIdAndDelete(id,(error)=>{
+if(error){
+    res.status(400).send({
+        msg:"Error al eliminar el usuario"
+    })
+}
+res.status(200).send({
+    msg:"Usuario eliminado"
+})
+    })
+}
+
 module.exports={
     getMe,
     getUsers,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
