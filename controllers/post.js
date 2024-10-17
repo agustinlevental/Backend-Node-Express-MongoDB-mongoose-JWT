@@ -63,8 +63,24 @@ Post.findByIdAndDelete({_id:id},(error)=>{
     }
 })
 }
+
+function getPost(req,res){
+    const {path} = req.params;
+    Post.findOne({path},(error,postStored)=>{
+        if(error){
+            res.status(500).send({msg:"Error del servidor"})
+        } else if (!postStored){
+            res.status(400).send({msg:"No se ha encontrado el post"})
+        } else {
+            res.status(200).send(postStored)
+        }
+    })
+}
+
 module.exports={
     createPost,
     getPosts,
     updatePost,
-    deletePost}
+    deletePost,
+    getPost
+}

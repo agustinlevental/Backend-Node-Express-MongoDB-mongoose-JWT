@@ -11,5 +11,6 @@ api.post("/post",[md_auth.asureAuth,md_upload],postController.createPost)
 api.get("/posts",postController.getPosts)
 api.patch("/post/:id",[md_auth.asureAuth,md_upload],postController.updatePost)
 api.delete("/post/:id",[md_auth.asureAuth],postController.deletePost)
+api.get("/post/:path",postController.getPost)
 
 module.exports=api;
