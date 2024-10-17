@@ -1,3 +1,4 @@
+const newsLetter = require("../models/newsLetter");
 const NewsLetter = require("../models/newsLetter");
 
 function suscribeEmail(req,res){
@@ -17,4 +18,19 @@ if(error){
     })
 }
 
-module.exports ={suscribeEmail}
+function getEmails(req,res){
+    const {page=1,limit=10} = req.query;
+
+    const options ={
+        page: parseInt(page),
+        limit: parseInt(limit),
+    }
+
+    NewsLetter.paginate({},options,(error,emailStored)=>{
+        if(error){res.status(400).send({msg:"Error al obtener los emails"})}
+        else{
+            res.status(200).send(emailStored);
+        }
+    })
+}
+module.exports ={suscribeEmail,getEmails}
