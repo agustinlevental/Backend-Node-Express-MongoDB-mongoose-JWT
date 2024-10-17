@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const DB_USER = "agustinlevental";
-const DB_PASSWORD = process.env.DB_PASSWORD; // Remove the extra semicolons
-const DB_HOST = "mern.olui7.mongodb.net/MERN?retryWrites=true&w=majorit";
+const DB_PASSWORD = process.env.DB_PASSWORD; 
+const DB_HOST = "mern.7ai8t.mongodb.net/?retryWrites=true&w=majority&appName=Mern";
 const API_VERSION = "v1";
 const IP_SERVER = "localhost";
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
