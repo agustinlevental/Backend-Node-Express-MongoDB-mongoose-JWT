@@ -33,4 +33,16 @@ function getEmails(req,res){
         }
     })
 }
-module.exports ={suscribeEmail,getEmails}
+
+function deleteEmail(req,res){
+    const {id} = req.params
+
+    NewsLetter.findByIdAndDelete(id,(error)=>{
+        if(error){
+            res.status(400).send({msg:"Error al eliminar el registro"})
+        } else {
+            res.status(200).send({msg:"Eliminación correta"})
+        }
+    })
+}
+module.exports ={suscribeEmail,getEmails,deleteEmail}
