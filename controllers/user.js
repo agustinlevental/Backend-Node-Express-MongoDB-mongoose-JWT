@@ -18,7 +18,9 @@ async function getMe(req,res){
 
 async function getUsers(req,res){
     const {active} = req.query;
+
  let response =null 
+ 
  if(active===undefined){
     //devuelvo todos los usuarios
     response= await User.find();
