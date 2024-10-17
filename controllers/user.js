@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs")
 const User = require("../models/users")
 const image = require("../utils/image")
+
 async function getMe(req,res){
     const {user_id} = req.user;
 
@@ -55,8 +56,37 @@ user.save((error,userStored)=>{
 
 }
 
+async function updateUser(req, res) {
+    const { id } = req.params;
+    const userData = req.body;
+  
+    try {
+      if (userData.password) {
+        const salt = bcrypt.genSaltSync(10);
+        const hashPassword  
+   = bcrypt.hashSync(userData.password, salt);
+        userData.password = hashPassword;
+      } else {
+        delete userData.password; 
+  
+      }
+  if(req.files.avatar){
+const imagePath = image.getFilePath(req.files.avatar)
+userData.avatar=imagePath;
+  }
+
+      await User.findByIdAndUpdate(id, userData);
+      res.status(200).send({ msg: "Actualización correcta" });
+    } catch (error) {
+    
+      res.status(400).send({ msg: "Error al actualizar el usuario"   
+   });
+    }
+  }
+
 module.exports={
     getMe,
     getUsers,
-    createUser
+    createUser,
+    updateUser
 }
