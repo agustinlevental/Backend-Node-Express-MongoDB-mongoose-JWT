@@ -33,7 +33,25 @@ function getPosts(req,res){
     })
 }
 
+function updatePost(req,res){
+    const {id} =req.params;
+    const postData = req.body;
+
+    if(req.files.miniature){
+        const imagePath= image.getFilePath(req.files.miniature);
+        postData.miniature=imagePath;
+    
+    }
+
+    Post.findByIdAndUpdate({_id:id},postData,(error)=>{
+        if(error){
+            res.status(400).send({msg:"error al actualizar el post"})
+        } else{
+            res.status(200).send({msg:"Post actualizado correctamente"})
+        }
+    })
+}
 module.exports={
     createPost,
-    getPosts
-}
+    getPosts,
+    updatePost}

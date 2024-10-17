@@ -9,5 +9,6 @@ const api = express.Router();
 
 api.post("/post",[md_auth.asureAuth,md_upload],postController.createPost)
 api.get("/posts",postController.getPosts)
+api.patch("/post/:id",[md_auth.asureAuth,md_upload],postController.updatePost)
 
 module.exports=api;
