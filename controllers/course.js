@@ -52,9 +52,23 @@ if(error){
     })
 }
 
+function deleteCourse(req,res){
+    const {id} = req.params;
+    Course.findByIdAndDelete(id,(error)=>{
+if(error){
+    res.status(400).send({msg:"Errror al eliminar el curso"})
+} else {
+    res.status(200).send({
+        msg:"Curso eliminado"
+    })
+}
+    })
+}
+
 module.exports={
     createCourse,
     getCourse,
-    updateCourse
+    updateCourse,
+    deleteCourse
 };
 
